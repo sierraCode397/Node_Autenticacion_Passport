@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const routerApi = require('./routes');
+const { checkApiKey } = require('./middlewares/auth.handler')
 const { logErrors, errorHandler, boomErrorHandler, handleSQLError } = require('./middlewares/error.handler');
 const { config } = require('./config/config');
 const pg = require('pg')
@@ -59,6 +60,10 @@ app.get('/api/ping', async (req, res) => {
 
   return res.json(responseData);
 });
+
+app.get('/api/ruta-auth', checkApiKey, (req, res) => {
+  res.send('Estas Autenticado!!!!');
+})
 
 routerApi(app);
 
