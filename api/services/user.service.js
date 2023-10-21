@@ -18,8 +18,10 @@ class UserService {
 
   async find() {
     const rta = await models.User.findAll({
-      include: ['customer'] //La associate/asociacion customer
+      include: ['customer'], //La associate/asociacion customer
+      attributes: { exclude: ['password'] }
     });
+
     return rta;
   }
 
