@@ -34,7 +34,10 @@ const options = {
   }
 }
 app.use(cors(options));
-require('./utils/auth/index');
+require('./utils/auth/index'); //Node.js busca y carga el módulo ubicado en la ruta especificada
+//El módulo se carga en tiempo de ejecución, no en tiempo de compilación.
+//puedes acceder a las exportaciones directamente usando la ruta del módulo como un objeto
+//Asi: require('./utils/auth/index').autenticarUsuario();
 
 app.use(express.static('public'));
 
