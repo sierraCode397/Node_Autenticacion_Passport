@@ -36,7 +36,7 @@ class User extends Model {
   static associate(models) {
     this.hasOne(models.Customer, {
       as: 'customer',
-      foreignKey: 'user_id'
+      foreignKey: 'userId'
     });
   }
   static config(sequelize){
