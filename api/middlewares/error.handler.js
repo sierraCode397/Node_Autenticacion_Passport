@@ -1,4 +1,3 @@
-const boom = require('@hapi/boom');
 const { ValidationError } = require('sequelize');
 
 function logErrors (err, req, res, next) {

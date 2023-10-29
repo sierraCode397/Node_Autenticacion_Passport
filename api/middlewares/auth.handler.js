@@ -6,7 +6,7 @@ function checkApiKey(req, res, next) {
   if (apiKey === config.apiKey){
     next();
   }else{
-    next(boom.unauthorized('Contraseña Incorrecta'));
+    next(boom.unauthorized());
   }
 }
 
@@ -16,7 +16,7 @@ function checkAdminRole(req, res, next) {
   if (user.role === 'admin') {
     next();
   }else {
-    next(boom.unauthorized());
+    next(boom.forbidden('Se requieren permisos de administrador'));
   }
 }
 
@@ -26,9 +26,10 @@ function checkRoles(...roles) {
     if (roles.includes(user.role)) {
       next();
     }else {
-      next(boom.unauthorized());
+      next(boom.forbidden('Se requieren mas permisos para el usuario'));
     }
   }
 }
+
 
 module.exports = { checkApiKey, checkAdminRole, checkRoles }

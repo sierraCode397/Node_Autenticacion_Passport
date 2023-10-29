@@ -6,8 +6,12 @@ const options = {
   secretOrKey: config.jwtSecret
 }
 
-const JwtStrategy = new Strategy(options, (payload, done) =>{
-  return done(null, payload);
+const JwtStrategy = new Strategy(options, (payload, done) => {
+  if (options.jwtFromRequest) {
+    return done(null, payload);
+  } else {
+    return done(new Error('Token JWT no válido'), false);
+  }
 });
 
 module.exports = JwtStrategy;
