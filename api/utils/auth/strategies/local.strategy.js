@@ -13,15 +13,14 @@ const LocalStrategy = new Strategy({
     const user = await service.findByEmail(email);
 
     if (!user){ //Son validaciones par algunos errores que pueden ocurrir
-      done(boom.unauthorized(), false) // usamos boom para manejar esos errores
+      done(boom.unauthorized('Email Incorrecto'), false) // usamos boom para manejar esos errores
     }
 
-    user.password;
     const isMatch = await bcrypt.compare(password, user.password); // El password normal, es el que el cleinet envia en el boddy
 //Al igual que todos los datos de la funcion asincrona de LocalStrategy
 
     if (!isMatch){
-      done(boom.unauthorized(), false)
+      done(boom.unauthorized('Contraseña Incorrecta'), false)
     }
 
     delete user.dataValues.password;
