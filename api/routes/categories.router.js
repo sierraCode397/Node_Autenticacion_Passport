@@ -9,6 +9,8 @@ const { createCategorySchema, updateCategorySchema, getCategorySchema } = requir
 const router = express.Router();
 const service = new CategoryService();
 
+//Pueden haber endpoints publicos sin necesidad de autenticacion y/o autorizaciones
+
 router.get('/',
   passport.authenticate('jwt', {session: false}),
   checkRoles('admin', 'seller', 'customer'),
