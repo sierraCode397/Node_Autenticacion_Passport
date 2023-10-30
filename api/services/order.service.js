@@ -6,7 +6,18 @@ class OrderService {
   }
 
   async create(data) {
-    const newOrder = await models.Order.create(data);
+    const customer = await models.Customer.findOne({
+      where: {
+        '$user.id$': data.userId
+      },
+      include: ['user']
+    })
+    if (!customer) {
+      throw boom.badRequest('Customer not found');
+    }
+    const newOrder = await models.Order.create({
+      customerId: customer.id
+    });
     return newOrder;
   }
 
@@ -19,7 +30,6 @@ class OrderService {
         association: 'customer',
         include:['user']
       },
-      'items'
     ]
     });
     return orders;
