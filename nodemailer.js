@@ -1,13 +1,13 @@
-"use strict";
 const nodemailer = require("nodemailer");
+const { config } = require('./api/config/config');
 
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   secure: true,
   port: 465,
   auth: {
-    user: 'izaack107@gmail.com',
-    pass: 'snmm moia vzlv yjvn'
+    user: config.email,
+    pass: config.appPassword
 }
 });
 
@@ -15,11 +15,11 @@ const transporter = nodemailer.createTransport({
 async function main() {
   // send mail with defined transport object
   const info = await transporter.sendMail({
-    from: 'alvena.kuhic56@ethereal.email', // sender address
+    from: 'izaack107@gmail.com', // sender address
     to: "isaacluisjuan0@gmail.com", // list of receivers
     subject: "Hello isaac ✔", // Subject line
-    text: "Hello world?", // plain text body
-    html: "<b>Hello world? soy isaac y esto es una prueba de envio de correos</b>", // html body
+    text: "APP_PASSWORD?", // plain text body
+    html: "<b>Usando variables de entorno para enviar correos</b>", // html body
   });
 
   console.log("Message sent: %s", info.messageId);
