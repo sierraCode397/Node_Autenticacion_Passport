@@ -1,8 +1,7 @@
 const { Strategy } = require('passport-local');
-const boom = require('@hapi/boom');
-const bcrypt = require('bcrypt');
-const UserService = require('./../../../services/user.service');
-const service = new UserService();
+
+const AuthService = require('./../../../services/auth.service');
+const service = new AuthService();
 
 const LocalStrategy = new Strategy({
   usernameField: 'email',
@@ -10,20 +9,8 @@ const LocalStrategy = new Strategy({
   },
   async (email, password, done) =>{
     try {
-    const user = await service.findByEmail(email);
+    const user = await service.getUser(email, password);
 
-    if (!user){ //Son validaciones par algunos errores que pueden ocurrir
-      done(boom.unauthorized('Email Incorrecto'), false) // usamos boom para manejar esos errores
-    }
-
-    const isMatch = await bcrypt.compare(password, user.password); // El password normal, es el que el cleinet envia en el boddy
-//Al igual que todos los datos de la funcion asincrona de LocalStrategy
-
-    if (!isMatch){
-      done(boom.unauthorized('Contraseña Incorrecta'), false)
-    }
-
-    delete user.dataValues.password;
     done(null, user);
 
   }catch(error){
