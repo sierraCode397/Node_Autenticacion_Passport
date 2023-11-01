@@ -20,6 +20,7 @@ class AuthService {
     }
 
     delete user.dataValues.password;
+    delete user.dataValues.recoveryToken;
     return user;
   }
 

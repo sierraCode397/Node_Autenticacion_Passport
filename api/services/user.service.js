@@ -19,9 +19,8 @@ class UserService {
   async find() {
     const rta = await models.User.findAll({
       include: ['customer'], //La associate/asociacion customer
-      attributes: { exclude: ['password'] }
+      attributes: { exclude: ['password', 'recoveryToken'] }
     });
-
     return rta;
   }
 
@@ -37,6 +36,8 @@ class UserService {
     if(!user){
       throw boom.notFound('User not found');
     }
+    delete user.dataValues.password;
+    delete user.dataValues.recoveryToken;
     return user;
   }
 

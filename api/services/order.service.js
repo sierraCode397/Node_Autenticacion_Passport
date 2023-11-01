@@ -28,8 +28,13 @@ class OrderService {
       },
       include: [{
         association: 'customer',
-        include:['user']
-      },
+        include:[
+          {
+            association: 'user',
+            attributes: { exclude: ['password', 'recoveryToken'] }
+          }
+        ],
+      }
     ]
     });
     return orders;
@@ -44,7 +49,12 @@ class OrderService {
     const order = await models.Order.findByPk(id, {
       include: [{
         association: 'customer',
-        include:['user']
+        include:[
+          {
+            association: 'user',
+            attributes: { exclude: ['password', 'recoveryToken'] }
+          }
+        ],
       },
       'items'
     ]

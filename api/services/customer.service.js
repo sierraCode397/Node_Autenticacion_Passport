@@ -8,7 +8,12 @@ class CustomerService {
 
   async find() {
     const rta = await models.Customer.findAll({
-      include: ['user'] //La associate/asociacion user
+      include: [
+        {
+          association: 'user',
+          attributes: { exclude: ['password', 'recoveryToken'] }
+        }
+      ]
     });
     return rta;
   }
@@ -34,6 +39,7 @@ class CustomerService {
       include: ['user'] //La associate/asociacion user
     });
     delete newCustomer.user.dataValues.password;
+    delete newCustomer.user.dataValues.recoveryToken;
     return newCustomer;
   }
 
