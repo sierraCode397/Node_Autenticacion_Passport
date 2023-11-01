@@ -27,4 +27,16 @@ router.post('/recovery',
     }
 });
 
+router.post('/change-password',
+//crea unn schema de validacion
+  async (req, res, next) => {
+    try {
+      const { token, newPassword } = req.body;
+      const rta = await service.changePassword(token, newPassword);
+      res.json(rta);
+    } catch (error) {
+      next(error);
+    }
+});
+
 module.exports = router;
