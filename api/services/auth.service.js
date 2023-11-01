@@ -35,27 +35,38 @@ class AuthService {
     };
   }
 
-  async sendMail(email){
+  async sendRecovery(email){
     const user = await service.findByEmail(email);
     if (!user){
       throw boom.unauthorized('No estas Autorizado Bro');
     }
+    const payload = {
+      sub: user.id
+    };
+    const token = jwt.sign(payload, config.jwtRecovery, {expiresIn: '15min'});
+    const link = `http://myfrontend.com/recovery?token=${token}`;
+    await service.update(user.id, {recoveryToken: token});
+    const mail = {
+      from: config.smtpEmail,
+      to: `${user.email}`,
+      subject: `${user.email}, Recupera tu contraseña`,
+      html: `<b>Con este link podras restablecer tu contraseña ---> ${link}</b>`,
+    }
+    const rta = await this.sendMail(mail);
+    return rta;
+  }
+
+  async sendMail(infoMail){
     const transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
       secure: true,
       port: 465,
       auth: {
-        user: config.email,
-        pass: config.appPassword
+        user: config.smtpEmail,
+        pass: config.smtpPassword
     }
     });
-    await transporter.sendMail({
-      from: config.email, // sender address
-      to: `${user.email}`, // list of receivers
-      subject: `Hello ${user.email}`, // Subject line
-      text: "Restablecer contraeña", // plain text body
-      html: "<b>Con este link podras restablecer tu contraseña</b>", // html body
-    });
+    await transporter.sendMail(infoMail);
     return { message: 'Mail sent' };
   }
 }

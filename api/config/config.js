@@ -8,8 +8,9 @@ const config = {
   dbLocalUrl: process.env.DATABASE_LOCAL_URL,
   apiKey: process.env.API_KEY,
   jwtSecret: process.env.JWT_SECRET,
-  appPassword: process.env.APP_PASSWORD,
-  email: process.env.EMAIL
+  smtpPassword: process.env.APP_PASSWORD,
+  smtpEmail: process.env.EMAIL,
+  jwtRecovery: process.env.JWT_PASSWORD
 }
 
 module.exports = { config };
