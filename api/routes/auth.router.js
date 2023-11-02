@@ -1,11 +1,13 @@
 const express = require('express');
 const passport = require('passport');
+const validatorHandler = require('./../middlewares/validator.handler');
+const { createRecoverySchema } = require('../schemas/auth.recovery.schema');
 const AuthService = require('./../services/auth.service');
 const service = new AuthService();
 const router = express.Router();
 
 router.post('/login',
-  passport.authenticate('local', {session: false}),
+  passport.authenticate('jwt', {session: false}),
   async (req, res, next) => {
     try {
       const user = req.user;
@@ -16,7 +18,7 @@ router.post('/login',
 });
 
 router.post('/recovery',
-  passport.authenticate('local', {session: false}),
+  passport.authenticate('jwt', {session: false}),
   async (req, res, next) => {
     try {
       const { email } = req.body;
@@ -28,8 +30,7 @@ router.post('/recovery',
 });
 
 router.post('/change-password',
-  passport.authenticate('local', {session: false}),
-
+  validatorHandler(createRecoverySchema, 'body'),
 //crea unn schema de validacion
   async (req, res, next) => {
     try {
