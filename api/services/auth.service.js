@@ -68,7 +68,7 @@ class AuthService {
       await service.update(user.id, {recoveryToken: null, password: hash});
       return { message: 'Password changed'}
     } catch (error) {
-        throw boom.unauthorized('El tiempo de recuperacion ah expirado');
+        throw boom.unauthorized('No estas Autorizado');
     }
   }
 
