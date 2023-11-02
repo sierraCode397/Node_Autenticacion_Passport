@@ -1,6 +1,5 @@
 const express = require('express');
 const passport = require('passport');
-
 const AuthService = require('./../services/auth.service');
 const service = new AuthService();
 const router = express.Router();
@@ -17,6 +16,7 @@ router.post('/login',
 });
 
 router.post('/recovery',
+  passport.authenticate('local', {session: false}),
   async (req, res, next) => {
     try {
       const { email } = req.body;
@@ -28,6 +28,8 @@ router.post('/recovery',
 });
 
 router.post('/change-password',
+  passport.authenticate('local', {session: false}),
+
 //crea unn schema de validacion
   async (req, res, next) => {
     try {

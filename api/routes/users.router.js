@@ -3,20 +3,25 @@ const passport = require('passport');
 const UserService = require('./../services/user.service');
 const validatorHandler = require('./../middlewares/validator.handler');
 const { updateUserSchema, createUserSchema, getUserSchema } = require('./../schemas/user.schema');
+const { checkRoles } = require('./../middlewares/auth.handler');
 
 const router = express.Router();
 const service = new UserService();
 
-router.get('/', async (req, res, next) => {
-  try {
-    const users = await service.find();
-    res.json(users);
-  } catch (error) {
-    next(error);
-  }
+router.get('/',
+  passport.authenticate('jwt', {session: false}),
+  async (req, res, next) => {
+    try {
+      const users = await service.find();
+      res.json(users);
+    } catch (error) {
+      next(error);
+    }
 });
 
 router.get('/:id',
+  passport.authenticate('jwt', {session: false}),
+  checkRoles('admin', 'prime'),
   validatorHandler(getUserSchema, 'params'),
   async (req, res, next) => {
     try {
@@ -45,6 +50,7 @@ router.post('/',
 
 router.patch('/:id',
   passport.authenticate('jwt', {session: false}),
+  checkRoles('admin', 'prime'),
   validatorHandler(getUserSchema, 'params'),
   validatorHandler(updateUserSchema, 'body'),
   async (req, res, next) => {
@@ -61,6 +67,7 @@ router.patch('/:id',
 
 router.delete('/:id',
   passport.authenticate('jwt', {session: false}),
+  checkRoles('prime'),
   validatorHandler(getUserSchema, 'params'),
   async (req, res, next) => {
     try {
