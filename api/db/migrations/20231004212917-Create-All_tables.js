@@ -23,7 +23,8 @@ module.exports = {
       {
         email: config.authCorreo,
         password: hash,
-        role: 'prime'
+        role: 'prime',
+        create_at: new Date()
       }
     ]);
     await queryInterface.createTable(CATEGORIE_TABLE, CategorieSchema);
