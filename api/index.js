@@ -53,7 +53,7 @@ app.get('/api/ping', async (req, res) => {
   const result = await pool.query('SELECT NOW()')
 
   const additionalResponse = {
-    message:'Conexion a la Base de datos: -----> '+ URI,
+    message:`Conexion a la Base de datos: -----> my_${URI}_more176/postgres@host:3000`
   };
 
   // Devolver ambas respuestas en un objeto
