@@ -9,8 +9,6 @@ const router = express.Router();
 const service = new OrderService();
 
 router.get('/',
-  passport.authenticate('jwt', {session: false}),
-  checkRoles('admin', 'seller', 'customer', 'prime'),
   async (req, res, next) => {
     try {
       const orders = await service.find();

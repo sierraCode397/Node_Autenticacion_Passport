@@ -1,6 +1,5 @@
 const express = require('express');
 const passport = require('passport');
-const { checkRoles } = require('./../middlewares/auth.handler');
 const OrderService = require('./../services/order.service');
 const validatorHandler = require('./../middlewares/validator.handler');
 const { updateOrderSchema, getOrderSchema } = require('./../schemas/order.schema');
@@ -10,7 +9,6 @@ const service = new OrderService();
 
 router.get('/',
   passport.authenticate('jwt', {session: false}),
-  checkRoles('admin', 'seller', 'customer', 'prime'),
   async (req, res, next) => {
   try {
     const orders = await service.find();

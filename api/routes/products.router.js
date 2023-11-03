@@ -9,7 +9,6 @@ const router = express.Router();
 const service = new ProductsService();
 
 router.get('/',
-  passport.authenticate('jwt', {session: false}),
   validatorHandler(queryProductSchema, 'query'),
   async (req, res, next) => {
     try {

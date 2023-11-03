@@ -9,7 +9,6 @@ const router = express.Router();
 const service = new UserService();
 
 router.get('/',
-  passport.authenticate('jwt', {session: false}),
   async (req, res, next) => {
     try {
       const users = await service.find();
