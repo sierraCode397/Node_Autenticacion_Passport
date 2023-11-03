@@ -36,6 +36,7 @@ router.get('/:id',
 
 router.post('/',
   passport.authenticate('jwt', {session: false}),
+  checkRoles('prime'),
   validatorHandler(createUserSchema, 'body'),
   async (req, res, next) => {
     try {
@@ -50,7 +51,7 @@ router.post('/',
 
 router.patch('/:id',
   passport.authenticate('jwt', {session: false}),
-  checkRoles('admin', 'prime'),
+  checkRoles('prime'),
   validatorHandler(getUserSchema, 'params'),
   validatorHandler(updateUserSchema, 'body'),
   async (req, res, next) => {

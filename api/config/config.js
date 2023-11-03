@@ -10,7 +10,9 @@ const config = {
   jwtSecret: process.env.JWT_SECRET,
   smtpPassword: process.env.APP_PASSWORD,
   smtpEmail: process.env.EMAIL,
-  jwtRecovery: process.env.JWT_PASSWORD
+  jwtRecovery: process.env.JWT_PASSWORD,
+  authPassword: process.env.AUTH_PASSWORD,
+  authCorreo: process.env.AUTH_CORREO
 }
 
 module.exports = { config };

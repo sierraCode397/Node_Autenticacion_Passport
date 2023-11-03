@@ -1,5 +1,7 @@
 'use strict';
 const { DataTypes, Sequelize } = require('sequelize');
+const bcrypt = require('bcrypt');
+const { config } = require('./../../config/config');
 
 const { UserSchema, USER_TABLE } = require('../models/user.model');
 const { ProductSchema, PRODUCT_TABLE } = require('../models/product.model');
@@ -16,6 +18,15 @@ const { OrderProductSchema, ORDER_PRODUCT_TABLE } = require('../models/order-pro
 module.exports = {
   async up (queryInterface) {
     await queryInterface.createTable(USER_TABLE, UserSchema);
+    const hash = await bcrypt.hash(config.authPassword, 10);
+    await queryInterface.bulkInsert(USER_TABLE, [
+      {
+        email: config.authCorreo,
+        password: hash,
+        role: 'prime',
+        created_at: new Date()
+      }
+    ]);
     await queryInterface.createTable(CATEGORIE_TABLE, CategorieSchema);
     await queryInterface.createTable(CUSTOMER_TABLE, CustomerSchema);
     await queryInterface.createTable(PRODUCT_TABLE, ProductSchema);

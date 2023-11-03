@@ -14,7 +14,6 @@ const service = new CustomerService();
 
 router.get('/',
   passport.authenticate('jwt', {session: false}),
-  checkRoles('admin', 'seller', 'customer', 'prime'),
   async (req, res, next) => {
     try {
       res.json(await service.find());
