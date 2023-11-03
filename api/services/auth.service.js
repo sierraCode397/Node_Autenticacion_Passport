@@ -48,7 +48,7 @@ class AuthService {
     const link = `http://myfrontend.com/recovery?token=${token}`;
     await service.update(user.id, {recoveryToken: token});
     const mail = {
-      from: config.smtpEmail,
+      from: config.authCorreo,
       to: `${user.email}`,
       subject: `${user.email}, Recupera tu contraseña`,
       html: `<b>Con este link podras restablecer tu contraseña ---> ${link}</b>`,
@@ -78,7 +78,7 @@ class AuthService {
       secure: true,
       port: 465,
       auth: {
-        user: config.smtpEmail,
+        user: config.authCorreo,
         pass: config.smtpPassword
     }
     });
