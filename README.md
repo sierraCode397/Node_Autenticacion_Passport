@@ -1,9 +1,11 @@
-# Node_DB_PostgreSQL
+# Node_Autenticacion_Passport
 
 
 ## Descripción
 
-Node_DB_PostgreSQL es un servicio de backend hecho con Node y la libreria **EXPRESS** para una escalabilidad mucho mayor, se conecta a una base de datos PostgreSQL. Utiliza el ORM **Sequelize** para hacer las consultas que tu consideres a las tablas de tu Base de datos. Maneja datos y relaciones 1 a 1, 1 a N y N a N (N = Muchos). Ofrece una variedad de endpoints utilizando los métodos CRUD para procesar datos y algunos procesos internos para mejorar la calidad de la respuesta, todo con validaciones en middlewares utilizando la libreria **JOI**.
+**Node_Autenticacion_Passport** es un servicio de backend hecho con Node y la libreria **EXPRESS** para una escalabilidad mucho mayor, se conecta a una base de datos PostgreSQL. Utiliza el ORM **Sequelize** para hacer las consultas que tu consideres a las tablas de tu Base de datos. Maneja datos y relaciones 1 a 1, 1 a N y N a N (N = Muchos). Ofrece una variedad de endpoints utilizando los métodos CRUD para procesar datos y algunos procesos internos para mejorar la calidad de la respuesta.
+
+Este App fue creada a partir del proyecto anterior **Node_DB_PostgreSQL** al que puedes acceder [aqui](https://github.com/sierraCode397/Node_DB_PostgreSQL "aqui"). Sin embargo, **Node_Autenticacion_Passport** es una version mas actualizda pues cuenta con dos implementaciones muy destacables: **Autenticacion y Autorizaciones**, implementado con dos librerias de las que aqui encontraras mas informacion: [PassPort.Js](https://www.passportjs.org/docs/ "PassPort.Js") y [JWT(jsonwebtoken)](https://jwt.io/ "JWT(jsonwebtoken)"). Esto quiere decir, que a diferencia de su version anterior ahora deberas crear una cuenta de usuario(cliente) eh **iniciar sesion** con esa cuenta para poder tener acceso al resto de EndPoints de la aplicacion (como en [Node_DB_PostgreSQL](https://github.com/sierraCode397/Node_DB_PostgreSQL "Node_DB_PostgreSQL")), enviando en los **headers** de todas tus demas peticiones al resto de la app un token de autorización que se te otorgara al iniciar sesion. Ademas de contar con funciones como la recuperacion y cambio de contraseña de tu perfil en caso de ser extraviada o expuesta. 
 
 ## Rutas
 
@@ -79,16 +81,16 @@ Crea un archivo **.ENV** en la raíz del proyecto y proporciona las siguientes v
 > DATABASE_URL=''
 > DATABASE_LOCAL_URL=''
 
-Otras para la Llave secreta que se necesita para la creacion de los Token (Con "JWT"):
+Otras para la Llave secreta que se necesita para la creacion de los Token (Con "JWT"), simplemente deben ser contraseñas, pero seran usadas paralos tokens:
 
 > JWT_PASSWORD=''
 > JWT_SECRET=''
 
-Y esta para que la aplicacion pueda enviar correos desde un correo que le asignes (Con "nodemailer"). Debe ser una app_password que te proporciona google para acceder a tu gmail desde cualquier dispositivo que tenga esta clave, la puedes encontrar en el apartado de "Verificacion en dos pasos"
+Y esta para que la aplicacion pueda enviar correos desde un correo que le asignes (Con la libreria "nodemailer") puedes investigar mas en [Documentacion de NodeMailer](http://nodemailer.com/ "Documentacion de NodeMailer"). Debe ser una app_password que te proporciona google para acceder a tu gmail desde cualquier dispositivo que tenga esta clave. La puedes encontrar en el apartado de "Verificacion en dos pasos" en tu cuenta de google:
 
 > APP_PASSWORD='' 
 
-Tambien una contraseña y correo para crear un usuario por defecto en tu base de datos (Que tendra esa contraseña que le asignes) y para darle a Nodemailer un el correo al que va poder acceder:
+Tambien una contraseña y correo para crear un usuario por defecto en tu base de datos (Que tendra esa contraseña que le asignes y correo) y para darle a Nodemailer un el correo al que va poder acceder para enviar otros:
 
 > AUTH_CORREO=''
 > AUTH_PASSWORD=''
