@@ -5,7 +5,7 @@
 
 **Node_Autenticacion_Passport** es un servicio de backend hecho con Node y la libreria **EXPRESS** para una escalabilidad mucho mayor, se conecta a una base de datos PostgreSQL. Utiliza el ORM **Sequelize** para hacer las consultas que tu consideres a las tablas de tu Base de datos. Maneja datos y relaciones 1 a 1, 1 a N y N a N (N = Muchos). Ofrece una variedad de endpoints utilizando los métodos CRUD para procesar datos y algunos procesos internos para mejorar la calidad de la respuesta.
 
-Este App fue creada a partir del proyecto anterior **Node_DB_PostgreSQL** al que puedes acceder [aqui](https://github.com/sierraCode397/Node_DB_PostgreSQL "aqui"). Sin embargo, **Node_Autenticacion_Passport** es una version mas actualizda pues cuenta con dos implementaciones muy destacables: **Autenticacion y Autorizaciones**, implementado con dos librerias de las que aqui encontraras mas informacion: [PassPort.Js](https://www.passportjs.org/docs/ "PassPort.Js") y [JWT(jsonwebtoken)](https://jwt.io/ "JWT(jsonwebtoken)"). Esto quiere decir, que a diferencia de su version anterior ahora deberas crear una cuenta de usuario(cliente) eh **iniciar sesion** con esa cuenta para poder tener acceso al resto de EndPoints de la aplicacion (como en [Node_DB_PostgreSQL](https://github.com/sierraCode397/Node_DB_PostgreSQL "Node_DB_PostgreSQL")), enviando en los **headers** de todas tus demas peticiones al resto de la app un token de autorización que se te otorgara al iniciar sesion. Ademas de contar con funciones como la recuperacion y cambio de contraseña de tu perfil en caso de ser extraviada o expuesta. 
+Esta App fue creada a partir del proyecto anterior **Node_DB_PostgreSQL** al que puedes acceder [aqui](https://github.com/sierraCode397/Node_DB_PostgreSQL "aqui"). Sin embargo, **Node_Autenticacion_Passport** es una version mas actualizda pues cuenta con dos implementaciones muy destacables: **Autenticacion y Autorizaciones**, implementado con dos librerias de las que aqui encontraras mas informacion: [PassPort.Js](https://www.passportjs.org/docs/ "PassPort.Js") y [JWT(jsonwebtoken)](https://jwt.io/ "JWT(jsonwebtoken)"). Esto quiere decir, que a diferencia de su version anterior ahora deberas crear una cuenta de usuario(cliente) eh **iniciar sesion** con esa cuenta para poder tener acceso al resto de EndPoints de la aplicacion (como en [Node_DB_PostgreSQL](https://github.com/sierraCode397/Node_DB_PostgreSQL "Node_DB_PostgreSQL")), enviando en los **headers** de todas tus demas peticiones al resto de la app un token de autorización que se te otorgara al iniciar sesion. Ademas de contar con funciones como la recuperacion y cambio de contraseña de tu perfil en caso de ser extraviada o expuesta. 
 
 ## Rutas
 
@@ -13,6 +13,10 @@ En todos las rutas cuetas con los diferentes tipos de endpoitns de CRUD [GET, PO
 Sin embargo, todas las rutas cuentan con un **ENDPOINT** Adicional (GET /:id) para obtener solo un dato en espesifico segun su **ID** y segun su tabla, que te proporcionara informacion exacta de ese Item.
 
 Las rutas disponibles son: 
+
+   - Login -> /api/v1/auth/login  usa POST
+
+   **Login** es la ruta donde deberas ingresar tu correo y contraseña para recivir el Token que te permitira acceder al resto de la aplicaion. Recuerda enviar ese Token en los Headers del resto de tus peticiones.
 
    -  Users -> /api/v1/users
 
@@ -40,6 +44,18 @@ Las rutas disponibles son:
    -  Order-Products -> /api/v1/order-products
 
    **Order-Products** es una tabla ternaria, que esta relacionada 1 a N con las tablas, "Products" y "Orders" para generar la relacion N a N, aqui deberas especificar a que orden (que ya tiene un usuario y cliente) le vas a asignar que producto y cuantos de estos productos, para asi generar un total del precio y una lista de productos para el usuario.
+
+   - Recovery your password -> /api/v1/auth/recovery  usa POST
+
+   **Recovery your password** es la ruta que debes usar para recuperar tu contraseña en caso de ser extraviada, lo que debes hacer en enviar el Email de tu cuenta. Esto enviara un token de recuperacion (Distinto al token de acceso) para que introduzcas en los parametros de la ruta **change-password**. Ese token, estara en los **Params** de el link que se te envio.
+
+   - Change-password -> /api/v1/auth/change-password  usa POST
+
+   **Change-password** es la ruta donde deberas enviar el token de recuperacion (optenido en el email) y la nueva contraseña que vas a querer. Una vez termines ese proceso, habras cambiado la contraseña de tu cuenta y podras volver a acceder a la aplicacion.
+
+   - Profile -> /api/v1/profile/my-orders  usa GET
+
+   **Profile** es la ruta (unica ruta) donde podras ver las ordenes que tu perfil a generado para tu ID. Para poder acceder a esa informacion solamente es necesario que envies tu Token de Autenticacion (El de inicio de sesion) en los headers de tu peticion y automaticamente te mostrara que ordenes estan "a tu nombre".
 
 ## Requisitos Previos
 
