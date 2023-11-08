@@ -9,6 +9,7 @@ const { CategorieSchema, CATEGORIE_TABLE } = require('../models/categories.model
 const { ORDER_TABLE } = require('../models/order.model');
 const { CustomerSchema, CUSTOMER_TABLE } = require('../models/customer.model');
 const { OrderProductSchema, ORDER_PRODUCT_TABLE } = require('../models/order-products.model');
+const { CertificateSchema, CERTIFICATE_TABLE } = require('../models/certificates.model');
 
 //Importante que en las migraciones tomes en cuenta el orden de creacion de las tablas
 //Esto por que algunas van a estar relacionadas entre si y deben ser credas primero las ENTIDADES FUERTES
@@ -56,6 +57,7 @@ module.exports = {
       }
     });
     await queryInterface.createTable(ORDER_PRODUCT_TABLE, OrderProductSchema);
+    await queryInterface.createTable(CERTIFICATE_TABLE, CertificateSchema);
   },
 
   async down (queryInterface) {

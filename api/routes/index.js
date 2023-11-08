@@ -8,6 +8,8 @@ const customerRouter = require('./customers.router');
 const orderProductsRouter = require('./order-products.router');
 const authRouter = require('./auth.router');
 const profileRouter = require('./profile.router');
+const certificateRouter = require('./certificates.router');
+
 
 
 function routerApi(app) {
@@ -21,6 +23,7 @@ function routerApi(app) {
   router.use('/order-products', orderProductsRouter);
   router.use('/auth', authRouter);
   router.use('/profile', profileRouter);
+  router.use('/certificates', certificateRouter);
 
 }
 
