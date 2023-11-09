@@ -7,8 +7,8 @@ const service = new CertificateService();
 router.get('/',
   async (req, res, next) => {
   try {
-    const categories = await service.find();
-    res.json(categories);
+    const certificates = await service.find();
+    res.json(certificates);
   } catch (error) {
     next(error);
   }
@@ -18,8 +18,8 @@ router.get('/:id',
   async (req, res, next) => {
     try {
       const { id } = req.params;
-      const category = await service.findOne(id);
-      res.json(category);
+      const certificate = await service.findOne(id);
+      res.json(certificate);
     } catch (error) {
       next(error);
     }
@@ -30,8 +30,21 @@ router.post('/',
   async (req, res, next) => {
     try {
       const body = req.body;
-      const newCategory = await service.create(body);
-      res.status(201).json(newCategory);
+      const newCertificate = await service.create(body);
+      res.status(201).json(newCertificate);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+router.patch('/:id',
+  async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const body = req.body;
+      const certificate = await service.update(id, body);
+      res.json(certificate);
     } catch (error) {
       next(error);
     }

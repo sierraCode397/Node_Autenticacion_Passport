@@ -22,6 +22,12 @@ class CertificateService {
     }
     return certificate;
   }
+
+  async update(id, changes) {
+    const certificate = await this.findOne(id);
+    const rta = await certificate.update(changes);
+    return rta;
+  }
 }
 
 module.exports = CertificateService;
