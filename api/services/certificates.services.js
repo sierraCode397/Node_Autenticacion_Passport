@@ -30,8 +30,8 @@ class CertificateService {
   }
 
   async delete(id) {
-    const categorie = await this.findOne(id);
-    await categorie.destroy();
+    const certificate = await this.findOne(id);
+    await certificate.destroy();
     return { id };
   }
 }

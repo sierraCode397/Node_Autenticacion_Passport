@@ -5,6 +5,7 @@ const { Categorie, CategorieSchema } = require('./categories.model');
 const { Customer, CustomerSchema } = require('./customer.model');
 const { OrderProduct, OrderProductSchema } = require('./order-products.model');
 const { Certificate, CertificateSchema } = require('./certificates.model');
+const { Portafolio, PortafolioSchema } = require('./portafolio.model');
 
 function setupModels(sequelize) {
   User.init(UserSchema, User.config(sequelize));
@@ -14,6 +15,7 @@ function setupModels(sequelize) {
   Customer.init(CustomerSchema, Customer.config(sequelize));
   OrderProduct.init(OrderProductSchema, OrderProduct.config(sequelize));
   Certificate.init(CertificateSchema, Certificate.config(sequelize));
+  Portafolio.init(PortafolioSchema, Portafolio.config(sequelize));
 
   Categorie.associate(sequelize.models);
   Product.associate(sequelize.models);
@@ -22,6 +24,7 @@ function setupModels(sequelize) {
   Order.associate(sequelize.models);
   OrderProduct.associate(sequelize.models);
   Certificate.associate(sequelize.models);
+  Portafolio.associate(sequelize.models);
 
 }
 

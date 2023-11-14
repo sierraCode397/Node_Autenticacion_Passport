@@ -9,8 +9,7 @@ const orderProductsRouter = require('./order-products.router');
 const authRouter = require('./auth.router');
 const profileRouter = require('./profile.router');
 const certificateRouter = require('./certificates.router');
-
-
+const portafolioRouter = require('./portafolio.router');
 
 function routerApi(app) {
   const router = express.Router();
@@ -24,6 +23,7 @@ function routerApi(app) {
   router.use('/auth', authRouter);
   router.use('/profile', profileRouter);
   router.use('/certificates', certificateRouter);
+  router.use('/portafolios', portafolioRouter);
 
 }
 
