@@ -25,6 +25,11 @@ module.exports = {
         unique: true,
         type: DataTypes.STRING,
       },
+      link: {
+        allowNull: false,
+        unique: true,
+        type: DataTypes.STRING,
+      },
       description: {
         allowNull: false,
         type: DataTypes.STRING,
