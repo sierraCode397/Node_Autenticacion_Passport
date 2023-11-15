@@ -19,6 +19,8 @@ const { CertificateSchema, CERTIFICATE_TABLE } = require('../models/certificates
 module.exports = {
   async up (queryInterface) {
     await queryInterface.createTable(USER_TABLE, UserSchema);
+
+    //Añadiendo usuario por defecto
     const hash = await bcrypt.hash(config.authPassword, 10);
     await queryInterface.bulkInsert(USER_TABLE, [
       {
@@ -28,6 +30,8 @@ module.exports = {
         create_at: new Date()
       }
     ]);
+    //--------------------------------
+
     await queryInterface.createTable(CATEGORIE_TABLE, CategorieSchema);
     await queryInterface.createTable(CUSTOMER_TABLE, CustomerSchema);
     await queryInterface.createTable(PRODUCT_TABLE, ProductSchema);

@@ -10,6 +10,8 @@ const authRouter = require('./auth.router');
 const profileRouter = require('./profile.router');
 const certificateRouter = require('./certificates.router');
 const portafolioRouter = require('./portafolio.router');
+const skillRouter = require('./skills.router');
+
 
 function routerApi(app) {
   const router = express.Router();
@@ -24,6 +26,7 @@ function routerApi(app) {
   router.use('/profile', profileRouter);
   router.use('/certificates', certificateRouter);
   router.use('/portafolios', portafolioRouter);
+  router.use('/skills', skillRouter);
 
 }
 
