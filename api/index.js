@@ -23,7 +23,15 @@ const pool = new pg.Pool({
 
 app.use(express.json());
 
-const whitelist = ['http://localhost:8080','http://localhost:3000', 'https://isaac-luisjuan.vercel.app', 'https://myapp.co', '*'];
+const whitelist = [
+  'http://localhost:8080',
+  'http://localhost:3000',
+  'https://isaac-luisjuan.vercel.app',
+  'https://myapp.co',
+  'https://sierracode397.github.io/JavaScriptAsincrono/',
+  'http://127.0.0.1:5500/src/',
+  '*'
+];
 const options = {
   origin: (origin, callback) => {
     if (whitelist.includes(origin) || !origin) {
@@ -33,6 +41,8 @@ const options = {
     }
   }
 }
+
+whitelist.push('*');
 app.use(cors(options));
 require('./utils/auth/index'); //Node.js busca y carga el módulo ubicado en la ruta especificada
 //El módulo se carga en tiempo de ejecución, no en tiempo de compilación.
