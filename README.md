@@ -102,7 +102,7 @@ Otras para la Llave secreta que se necesita para la creacion de los Token (Con "
 > JWT_PASSWORD=''
 > JWT_SECRET=''
 
-Y esta para que la aplicacion pueda enviar correos desde un correo que le asignes (Con la libreria "nodemailer") puedes investigar mas en [Documentacion de NodeMailer](http://nodemailer.com/ "Documentacion de NodeMailer"). Debe ser una app_password que te proporciona google para acceder a tu gmail desde cualquier dispositivo que tenga esta clave. La puedes encontrar en el apartado de "Verificacion en dos pasos" en tu cuenta de google:
+Y esta, para que la aplicacion pueda enviar correos desde un correo que le asignes. En esta API, se contempla que usaras un correo real y por lo tanto se usara ese para enviarte la clave. (Con la libreria "nodemailer") puedes investigar mas en [Documentacion de NodeMailer](http://nodemailer.com/ "Documentacion de NodeMailer"). Debe ser una app_password que te proporciona google para acceder a tu gmail desde cualquier dispositivo que tenga esta clave. La puedes encontrar en el apartado de "Verificacion en dos pasos" en tu cuenta de google:
 
 > APP_PASSWORD='' 
 
